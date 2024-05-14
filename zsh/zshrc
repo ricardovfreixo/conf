@@ -1,0 +1,43 @@
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="af-magic"
+plugins=(git docker-compose docker poetry)
+source $ZSH/oh-my-zsh.sh
+apt() { 
+  command nala "$@"
+}
+sudo() {
+  if [ "$1" = "apt" ]; then
+    shift
+    command sudo nala "$@"
+  else
+    command sudo "$@"
+  fi
+}
+alias vi="nvim"
+# alias air='~/.air'
+
+mkcd() {
+    mkdir -p "${1}"
+    cd "${1}"
+}
+
+alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+alias ll="ls -l --color --group-directories-first"
+
+export PATH=$PATH:/usr/local/go/bin:~/go/bin/
+source ~/conf/zsh/function.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
