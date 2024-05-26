@@ -31,7 +31,6 @@ mkcd() {
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 alias ll="ls -l --color --group-directories-first"
 
-export PATH=$PATH:/usr/local/go/bin:~/go/bin/
 source ~/conf/zsh/function.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

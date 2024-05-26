@@ -108,6 +108,9 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- VX: my custom keybinds
+vim.api.nvim_set_keymap('n', '<F12>', [[<cmd>Oil<cr>]], { desc = 'open Oil' })
+
 -- [[ Basic Autocommands ]]
 --  See :help lua-guide-autocommands
 
@@ -654,23 +657,12 @@ require('lazy').setup({
     end,
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    'folke/tokyonight.nvim',
+  {
+    'ellisonleao/gruvbox.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- Load the colorscheme here
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like
-      vim.cmd.hi 'Comment gui=none'
-    end,
+    config = true,
   },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -696,7 +688,7 @@ require('lazy').setup({
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      -- require('mini.statusline').setup()
+      require('mini.statusline').setup()
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
@@ -747,13 +739,15 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
+require('hardtime').setup()
+
 vim.filetype.add {
   pattern = {
     ['.*%.blade%.php'] = 'blade',
   },
 }
 
-require('lualine').setup()
+vim.cmd [[colorscheme gruvbox]]
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
