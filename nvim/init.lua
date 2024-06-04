@@ -739,8 +739,6 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
-require('hardtime').setup()
-
 vim.filetype.add {
   pattern = {
     ['.*%.blade%.php'] = 'blade',

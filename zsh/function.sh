@@ -1,3 +1,5 @@
+export PATH=$PATH:/usr/local/go/bin
+
 function update_ollama_models() {
     echo "Updating Ollama client..."
     curl -fsSL https://ollama.com/install.sh | sh
