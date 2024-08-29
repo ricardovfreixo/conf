@@ -108,8 +108,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- VX: my custom keybinds
--- vim.api.nvim_set_keymap('n', '<F12>', [[<cmd>Oil<cr>]], { desc = 'open Oil' })
-vim.api.nvim_set_keymap('n', '-', [[<cmd>Oil<cr>]], { desc = 'open Oil' })
+vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>:TodoTelescope<cr>]], { desc = '[S]earch [T]odos' })
 
 -- [[ Basic Autocommands ]]
 --  See :help lua-guide-autocommands
@@ -179,27 +178,6 @@ require('lazy').setup({
     },
   },
 
-  -- NOTE: Plugins can also be configured to run lua code when they are loaded.
-  --
-  -- This is often very useful to both group configuration, as well as handle
-  -- lazy loading plugins that don't need to be loaded immediately at startup.
-  --
-  -- For example, in the following configuration, we use:
-  --  event = 'VeryLazy'
-  --
-  -- which loads which-key after all the UI elements are loaded. Events can be
-  -- normal autocommands events (:help autocomd-events).
-  --
-  -- Then, because we use the `config` key, the configuration only runs
-  -- after the plugin has been loaded:
-  --  config = function() ... end
-
-  -- NOTE: Plugins can specify dependencies.
-  --
-  -- The dependencies are proper plugin specifications as well - anything
-  -- you do for a plugin at the top level, you can do for a dependency.
-  --
-  -- Use the `dependencies` key to specify the dependencies of a particular plugin
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -292,6 +270,10 @@ require('lazy').setup({
           --  See `:help K` for why this keymap
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
+          -- VX: added to try out lsp diag open
+
+          map('<C-h>', vim.diagnostic.open_float, 'Open float with error message if any')
+
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -354,7 +336,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
         --
 
         lua_ls = {
@@ -531,16 +513,6 @@ require('lazy').setup({
       }
     end,
   },
-
-  {
-    'ellisonleao/gruvbox.nvim',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = true,
-  },
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     version = false,
@@ -613,20 +585,5 @@ require('lazy').setup({
   --    For additional information see: :help lazy.nvim-lazy.nvim-structuring-your-plugins
   { import = 'custom.plugins' },
 }, {})
-
-vim.filetype.add {
-  pattern = {
-    ['.*%.blade%.php'] = 'blade',
-  },
-}
-
-vim.cmd [[colorscheme gruvbox]]
-
-vim.filetype.add {
-  pattern = {
-    ['.*%.blade%.php'] = 'blade',
-  },
-}
-
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

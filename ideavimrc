@@ -7,6 +7,8 @@ set showcmd
 set visualbell
 set clipboard+=unnamed
 
+set relativenumber number
+
 set ignorecase
 set smartcase
 set incsearch
@@ -14,13 +16,7 @@ set hlsearch
 
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
-
 set sneak
-
-Plug 'tpope/vim-surround'
-
-Plug 'preservim/nerdtree'
-set NERDTree
 set which-key
 set notimeout
 
@@ -40,9 +36,6 @@ inoremap <C-k> <Action>(PopupMenu-selectPrev)
 
 " Comment lines
 map <leader>c <action>(CommentByLineComment)
-
-" Open NERDTree (use q to exit)
-map <leader>x :NERDTreeToggle<CR>
 
 " Window splits
 map <leader>wv <Action>(SplitVertically)
@@ -73,3 +66,6 @@ nnoremap <A-p> :tabprev<CR>\
 nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>
 
+:map <leader>ee <Action>(ShowErrorDescription)
+:map <leader>hh <Action>(QuickImplementations)
+:map <leader>hj <Action>(ShowHoverInfo)
