@@ -8,11 +8,11 @@ return {
     {
       'JoosepAlviste/nvim-ts-context-commentstring',
       opts = {
-        custom_calculation = function(_, language_tree)
-          if vim.bo.filetype == 'blade' and language_tree._lang ~= 'javascript' and language_tree._lang ~= 'php' then
-            return '{{-- %s --}}'
-          end
-        end,
+        -- custom_calculation = function(_, language_tree)
+        --   if vim.bo.filetype == 'blade' and language_tree._lang ~= 'javascript' and language_tree._lang ~= 'php' then
+        --     return '{{-- %s --}}'
+        --   end
+        -- end,
       },
     },
     'nvim-treesitter/nvim-treesitter-textobjects',
@@ -32,16 +32,5 @@ return {
     ---@class ParserInfo[]
     local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
     require('nvim-treesitter.configs').setup(opts)
-
-    local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-
-    parser_config.blade = {
-      install_info = {
-        url = 'https://github.com/EmranMR/tree-sitter-blade',
-        files = { 'src/parser.c' },
-        branch = 'main',
-      },
-      filetype = 'blade',
-    }
   end,
 }

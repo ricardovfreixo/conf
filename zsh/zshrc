@@ -28,10 +28,7 @@ mkcd() {
     cd "${1}"
 }
 
-alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
-alias ll="ls -l --color --group-directories-first"
-
-alias go=/usr/local/go/bin/go
+alias ll="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 
 source ~/conf/zsh/function.sh
 
@@ -44,12 +41,7 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 
-export PATH=$PATH:~/.config/composer/vendor/bin/
-export PATH=$PATH:~/go/bin/
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
+export PATH=$PATH:~/.config/composer/vendor/bin/:~/.local/bin/
 # pnpm
 export PNPM_HOME="/home/vx/.local/share/pnpm"
 case ":$PATH:" in
